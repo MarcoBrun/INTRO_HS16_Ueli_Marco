@@ -68,6 +68,17 @@ for(;;){
 	LEDPin1_PutVal(0);
 	WAIT1_Waitms(1000);
 
+	LEDPin2_PutVal(1);
+	WAIT1_Waitms(1000);
+	LEDPin2_PutVal(0);
+	WAIT1_Waitms(1000);
+
+	LEDPin3_PutVal(1);
+	WAIT1_Waitms(1000);
+	LEDPin3_PutVal(0);
+	WAIT1_Waitms(1000);
+
+
 }
   /*** Don't write any code pass this line, or it will be deleted during code generation. ***/
   /*** RTOS startup code. Macro PEX_RTOS_START is defined by the RTOS component. DON'T MODIFY THIS CODE!!! ***/
