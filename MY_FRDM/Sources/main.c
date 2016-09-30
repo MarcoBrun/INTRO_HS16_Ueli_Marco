@@ -55,7 +55,14 @@ int main(void)
 
   /* Write your code here */
   /* For example: for(;;) { } */
+/*for(;;){
 
+	void LEDPin1_PutVal(True);
+	WAIT1_Waitms(1000);
+	void LEDPin1_PutVal(False);
+	WAIT1_Waitms(1000);
+
+}
   /*** Don't write any code pass this line, or it will be deleted during code generation. ***/
   /*** RTOS startup code. Macro PEX_RTOS_START is defined by the RTOS component. DON'T MODIFY THIS CODE!!! ***/
   #ifdef PEX_RTOS_START
@@ -64,7 +71,6 @@ int main(void)
   /*** End of RTOS startup code.  ***/
   /*** Processor Expert end of main routine. DON'T MODIFY THIS CODE!!! ***/
   for(;;){
-
 
 
   }
