@@ -4,13 +4,13 @@
 /*##                                   */
 /*##     Filename  : ProcessorExpert.ld */
 /*##                                   */
-/*##     Project   : MY_Robo           */
+/*##     Project   : INTRO_Robot_Master */
 /*##                                   */
-/*##     Processor : MK22FX512VLQ12    */
+/*##     Processor : MK22FX512VLK12    */
 /*##                                   */
 /*##     Compiler  : GNU C Compiler    */
 /*##                                   */
-/*##     Date/Time : 2016-09-29, 14:56, # CodeGen: 0 */
+/*##     Date/Time : 2016-09-30, 13:24, # CodeGen: 0 */
 /*##                                   */
 /*##     Abstract  :                   */
 /*##                                   */

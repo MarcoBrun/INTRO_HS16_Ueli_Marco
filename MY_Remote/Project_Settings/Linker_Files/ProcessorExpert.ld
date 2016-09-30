@@ -4,13 +4,13 @@
 /*##                                   */
 /*##     Filename  : ProcessorExpert.ld */
 /*##                                   */
-/*##     Project   : MY_Remote         */
+/*##     Project   : INTRO_Remote_Master */
 /*##                                   */
-/*##     Processor : MK20DX128VLH5     */
+/*##     Processor : MK20DX128VFT5     */
 /*##                                   */
 /*##     Compiler  : GNU C Compiler    */
 /*##                                   */
-/*##     Date/Time : 2016-09-29, 15:06, # CodeGen: 0 */
+/*##     Date/Time : 2016-09-30, 13:27, # CodeGen: 0 */
 /*##                                   */
 /*##     Abstract  :                   */
 /*##                                   */
