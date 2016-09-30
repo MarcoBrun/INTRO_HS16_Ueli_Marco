@@ -30,6 +30,8 @@
 /* Including needed modules to compile this module/procedure */
 #include "Cpu.h"
 #include "Events.h"
+#include "LEDPin1.h"
+#include "BitIoLdd10.h"
 #include "WAIT1.h"
 #include "UTIL1.h"
 #include "KSDK1.h"
@@ -55,11 +57,11 @@ int main(void)
 
   /* Write your code here */
   /* For example: for(;;) { } */
-/*for(;;){
+for(;;){
 
-	void LEDPin1_PutVal(True);
+	LEDPin1_PutVal(1);
 	WAIT1_Waitms(1000);
-	void LEDPin1_PutVal(False);
+	LEDPin1_PutVal(0);
 	WAIT1_Waitms(1000);
 
 }
@@ -70,10 +72,7 @@ int main(void)
   #endif
   /*** End of RTOS startup code.  ***/
   /*** Processor Expert end of main routine. DON'T MODIFY THIS CODE!!! ***/
-  for(;;){
-
-
-  }
+  for(;;){}
   /*** Processor Expert end of main routine. DON'T WRITE CODE BELOW!!! ***/
 } /*** End of main routine. DO NOT MODIFY THIS TEXT!!! ***/
 
