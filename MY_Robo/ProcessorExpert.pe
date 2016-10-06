@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PEproject>
   <Header>
-    <Name>INTRO_Robot_Master</Name>
+    <Name>MY_Robo</Name>
     <SavedBy>Erich Styger</SavedBy>
     <ModificationStamp>89</ModificationStamp>
     <Date>2016-02-29</Date>
@@ -29,7 +29,7 @@
     <UseExistingModules>true</UseExistingModules>
     <RenamePeripheries>false</RenamePeripheries>
     <Autodependency>true</Autodependency>
-    <ProjectCompNumb>292</ProjectCompNumb>
+    <ProjectCompNumb>297</ProjectCompNumb>
     <DelUnusedPreviouslyGenFiles>true</DelUnusedPreviouslyGenFiles>
     <GeneratedCodeFrozen>false</GeneratedCodeFrozen>
     <AssignInitComponentNameToPrph>true</AssignInitComponentNameToPrph>
