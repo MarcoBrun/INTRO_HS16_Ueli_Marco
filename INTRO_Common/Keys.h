@@ -64,6 +64,7 @@ typedef enum {
 
   #define KEY3_Get()  (!(SW3_GetVal()))
     /*!< Macro which returns TRUE if key is pressed */
+
 #else
   #define KEY3_Get()  FALSE
     /*!< if we do not have a button, then return 'not pressed' */
