@@ -1,11 +1,11 @@
 /* ###################################################################
 **     Filename    : Events.c
-**     Project     : MY_FRDM
+**     Project     : INTRO_FRDM_Master
 **     Processor   : MKL25Z128VLK4
 **     Component   : Events
 **     Version     : Driver 01.00
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2016-09-29, 14:56, # CodeGen: 0
+**     Date/Time   : 2016-09-20, 21:02, # CodeGen: 0
 **     Abstract    :
 **         This is user's event module.
 **         Put your event handler code here.
@@ -35,7 +35,7 @@ extern "C" {
 
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
-
+#include "Timer.h"
 /*
 ** ===================================================================
 **     Event       :  Cpu_OnNMIINT (module Events)
@@ -52,6 +52,27 @@ extern "C" {
 void Cpu_OnNMIINT(void)
 {
   /* Write your code here ... */
+}
+
+/*
+** ===================================================================
+**     Event       :  TI1_OnInterrupt (module Events)
+**
+**     Component   :  TI1 [TimerInt]
+**     Description :
+**         When a timer interrupt occurs this event is called (only
+**         when the component is enabled - <Enable> and the events are
+**         enabled - <EnableEvent>). This event is enabled only if a
+**         <interrupt service/event> is enabled.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void TI1_OnInterrupt(void)
+{
+#if PL_CONFIG_HAS_TIMER
+  TMR_OnInterrupt();
+#endif
 }
 
 /* END Events */

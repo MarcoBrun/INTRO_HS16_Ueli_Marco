@@ -29,7 +29,7 @@ static bool requestLCDUpdate = FALSE;
 typedef enum {
   LCD_MENU_ID_NONE = LCDMENU_ID_NONE, /* special value! */
   LCD_MENU_ID_MAIN,
-    LCD_MANU_ID_BACKLIGHT,
+    LCD_MENU_ID_BACKLIGHT,
 } LCD_MenuIDs;
 
 static bool BackLightMenuHandler(const struct LCDMenu_MenuItem_ *item, LCDMenu_EventType event, void **dataP) {
@@ -47,8 +47,8 @@ static bool BackLightMenuHandler(const struct LCDMenu_MenuItem_ *item, LCDMenu_E
 
 static const LCDMenu_MenuItem menus[] =
 {/* id,                                     grp, pos,   up,                       down,                             text,           callback */
-    {LCD_MENU_ID_MAIN,                        0,   0,   LCD_MENU_ID_NONE,         LCD_MANU_ID_BACKLIGHT,            "General",      NULL},
-      {LCD_MANU_ID_BACKLIGHT,                 1,   0,   LCD_MENU_ID_MAIN,         LCD_MENU_ID_NONE,                 NULL,           BackLightMenuHandler},
+    {LCD_MENU_ID_MAIN,                        0,   0,   LCD_MENU_ID_NONE,         LCD_MENU_ID_BACKLIGHT,            "General",      NULL},
+      {LCD_MENU_ID_BACKLIGHT,                 1,   0,   LCD_MENU_ID_MAIN,         LCD_MENU_ID_NONE,                 NULL,           BackLightMenuHandler},
 };
 
 uint8_t LCD_HandleRemoteRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *data, RNWK_ShortAddrType srcAddr, bool *handled, RPHY_PacketDesc *packet) {

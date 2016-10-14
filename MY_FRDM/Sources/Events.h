@@ -1,11 +1,11 @@
 /* ###################################################################
 **     Filename    : Events.h
-**     Project     : MY_FRDM
+**     Project     : INTRO_FRDM_Master
 **     Processor   : MKL25Z128VLK4
 **     Component   : Events
 **     Version     : Driver 01.00
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2016-09-29, 14:56, # CodeGen: 0
+**     Date/Time   : 2016-09-20, 21:02, # CodeGen: 0
 **     Abstract    :
 **         This is user's event module.
 **         Put your event handler code here.
@@ -33,17 +33,41 @@
 #include "PE_Error.h"
 #include "PE_Const.h"
 #include "IO_Map.h"
+#include "SW1.h"
+#include "BitIoLdd1.h"
+#include "SW2.h"
+#include "BitIoLdd2.h"
+#include "SW3.h"
+#include "BitIoLdd3.h"
+#include "SW4.h"
+#include "BitIoLdd4.h"
+#include "SW5.h"
+#include "BitIoLdd5.h"
+#include "SW6.h"
+#include "BitIoLdd6.h"
+#include "SW7.h"
+#include "BitIoLdd7.h"
 #include "LEDPin1.h"
 #include "BitIoLdd10.h"
 #include "LEDPin2.h"
 #include "BitIoLdd11.h"
 #include "LEDPin3.h"
 #include "BitIoLdd12.h"
+#include "TI1.h"
+#include "TimerIntLdd1.h"
+#include "TU1.h"
+//#include "TI1.h"
+//#include "TimerIntLdd1.h"
+//#include "TU1.h"
+//#include "CLS1.h"
+//#include "AS1.h"
+//#include "ASerialLdd1.h"
+//#include "RTT1.h"
 #include "WAIT1.h"
-#include "UTIL1.h"
-#include "KSDK1.h"
-#include "HF1.h"
 #include "CS1.h"
+#include "HF1.h"
+#include "KSDK1.h"
+#include "UTIL1.h"
 #include "KIN1.h"
 
 #ifdef __cplusplus
@@ -65,6 +89,22 @@ extern "C" {
 /* ===================================================================*/
 void Cpu_OnNMIINT(void);
 
+
+/*
+** ===================================================================
+**     Event       :  TI1_OnInterrupt (module Events)
+**
+**     Component   :  TI1 [TimerInt]
+**     Description :
+**         When a timer interrupt occurs this event is called (only
+**         when the component is enabled - <Enable> and the events are
+**         enabled - <EnableEvent>). This event is enabled only if a
+**         <interrupt service/event> is enabled.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void TI1_OnInterrupt(void);
 
 /* END Events */
 
