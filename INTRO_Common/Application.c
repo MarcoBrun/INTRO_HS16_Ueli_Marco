@@ -15,7 +15,7 @@
 #include "Keys.h"
 #include "KIN1.h"
 #if PL_CONFIG_HAS_SHELL
-  #include "CLS1.h"
+//  #include "CLS1.h"
 #endif
 #if PL_CONFIG_HAS_BUZZER
   #include "Buzzer.h"
@@ -165,7 +165,7 @@ static void Critical(void) {
 }
 #endif
 
-#include "CLS1.h"
+//#include "CLS1.h"
 
 void APP_Start(void) {
 #if PL_CONFIG_HAS_RTOS
