@@ -35,6 +35,30 @@
 #include "WAIT1.h"
 #include "UTIL1.h"
 #include "KIN1.h"
+#include "TI1.h"
+#include "TimerIntLdd1.h"
+#include "TU1.h"
+#include "CLS1.h"
+#include "AS1.h"
+#include "ASerialLdd1.h"
+#include "RTT1.h"
+#include "SW1.h"
+#include "ExtIntLdd1.h"
+#include "SW2.h"
+#include "ExtIntLdd2.h"
+#include "SW3.h"
+#include "ExtIntLdd3.h"
+#include "SW4.h"
+#include "ExtIntLdd4.h"
+#include "SW5.h"
+#include "ExtIntLdd5.h"
+#include "SW6.h"
+#include "BitIoLdd15.h"
+#include "SW7.h"
+#include "BitIoLdd16.h"
+#include "PTA.h"
+#include "PTB.h"
+#include "PTD.h"
 #include "KSDK1.h"
 #include "HF1.h"
 #include "CS1.h"
@@ -57,6 +81,11 @@ int main(void)
   /*** End of Processor Expert internal initialization.                    ***/
 
   /* Write your code here */
+#if 0
+  for(;;) {
+    RTT1_WriteString(0, "hello\r\n");
+  }
+#endif
   APP_Start();
   /* For example: for(;;) { } */
 

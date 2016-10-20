@@ -59,12 +59,48 @@ void APP_EventHandler(EVNT_Handle event) {
 #if PL_CONFIG_HAS_KEYS
   #if PL_CONFIG_NOF_KEYS>=1
   case EVNT_SW1_PRESSED:
-    LED2_Neg();
+    LED1_Neg();
     //CLS1_SendStr("SW1 pressed\r\n", CLS1_GetStdio()->stdOut);
-    //SHELL_SendString("SW1 pressed\r\n");
+    SHELL_SendString("SW1 pressed\r\n");
     #if PL_CONFIG_HAS_BUZZER
     BUZ_PlayTune(BUZ_TUNE_BUTTON);
     #endif
+    break;
+  #endif
+  #if PL_CONFIG_NOF_KEYS>=2
+  case EVNT_SW2_PRESSED:
+    SHELL_SendString("SW2 pressed\r\n");
+    LED1_Neg();
+    break;
+  #endif
+  #if PL_CONFIG_NOF_KEYS>=3
+  case EVNT_SW3_PRESSED:
+    SHELL_SendString("SW3 pressed\r\n");
+    LED1_Neg();
+    break;
+  #endif
+  #if PL_CONFIG_NOF_KEYS>=4
+  case EVNT_SW4_PRESSED:
+    SHELL_SendString("SW4 pressed\r\n");
+    LED1_Neg();
+    break;
+  #endif
+  #if PL_CONFIG_NOF_KEYS>=5
+  case EVNT_SW5_PRESSED:
+    SHELL_SendString("SW5 pressed\r\n");
+    LED1_Neg();
+    break;
+  #endif
+  #if PL_CONFIG_NOF_KEYS>=6
+  case EVNT_SW6_PRESSED:
+    SHELL_SendString("SW6 pressed\r\n");
+    LED1_Neg();
+    break;
+  #endif
+  #if PL_CONFIG_NOF_KEYS>=7
+  case EVNT_SW7_PRESSED:
+    SHELL_SendString("SW7 pressed\r\n");
+    LED1_Neg();
     break;
   #endif
 #endif /* PL_CONFIG_HAS_KEYS */
@@ -129,7 +165,7 @@ static void Critical(void) {
 }
 #endif
 
-//#include "CLS1.h"
+#include "CLS1.h"
 
 void APP_Start(void) {
 #if PL_CONFIG_HAS_RTOS
@@ -164,7 +200,7 @@ void APP_Start(void) {
     //WAIT1_Waitms(25); /* just wait for some arbitrary time .... */
     //LED1_Off();
     //LED2_Off();
-    WAIT1_Waitms(25); /* just wait for some arbitrary time .... */
+    //WAIT1_Waitms(25); /* just wait for some arbitrary time .... */
     //CLS1_SendStr((uint8_t*)"hello world!\r\n", CLS1_GetStdio()->stdOut);
   }
 #endif
