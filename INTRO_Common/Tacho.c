@@ -88,8 +88,10 @@ void TACHO_CalcSpeed(void) {
   if (negRight) {
     speedRight = -speedRight;
   }
-  TACHO_currLeftSpeed = -speedLeft; /* store current speed in global variable */
-  TACHO_currRightSpeed = -speedRight; /* store current speed in global variable */
+  EnterCritical(); /* added 25.04.2016 mb */
+    TACHO_currLeftSpeed = -speedLeft; /* store current speed in global variable */
+    TACHO_currRightSpeed = -speedRight; /* store current speed in global variable */
+    ExitCritical();
 }
 
 void TACHO_Sample(void) {
