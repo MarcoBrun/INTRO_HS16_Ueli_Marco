@@ -31,8 +31,8 @@ typedef struct {
 static const BUZ_Tune MelodyWelcome[] =
 { /* freq, ms */
     {300,500},
-    {500,200},
-    {300,100},
+//    {500,200},
+//    {300,100},
 };
 
 static const BUZ_Tune MelodyButton[] =

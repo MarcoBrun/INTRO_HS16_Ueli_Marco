@@ -17,6 +17,7 @@
 #include "KIN1.h"
 #if PL_CONFIG_HAS_SHELL
   #include "CLS1.h"
+  #include "Shell.h"
 #endif
 #if PL_CONFIG_HAS_BUZZER
   #include "Buzzer.h"
@@ -24,9 +25,6 @@
 #if PL_CONFIG_HAS_RTOS
   #include "FRTOS1.h"
   #include "RTOS.h"
-#endif
-#if PL_CONFIG_HAS_SHELL
-  #include "Shell.h"
 #endif
 #if PL_CONFIG_HAS_QUADRATURE
   #include "Q4CLeft.h"
@@ -130,8 +128,12 @@ static void APP_AdoptToHardware(void) {
 #if PL_CONFIG_HAS_MOTOR
   if (KIN1_UIDSame(&id, &RoboIDs[2])) { /* L4 */
     MOT_Invert(MOT_GetMotorHandle(MOT_MOTOR_LEFT), TRUE); /* revert left motor */
-    (void)Q4CLeft_SwapPins(TRUE);
+   // (void)Q4CLeft_SwapPins(TRUE);
+   // (void)Q4CRight_SwapPins(TRUE);
+  } else if (KIN1_UIDSame(&id, &RoboIDs[0])) { /* L20 */
     (void)Q4CRight_SwapPins(TRUE);
+    MOT_Invert(MOT_GetMotorHandle(MOT_MOTOR_LEFT), TRUE); /* revert left motor */
+    MOT_Invert(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), TRUE); /* revert left motor */
   }
 #endif
 #if PL_CONFIG_HAS_QUADRATURE && PL_CONFIG_BOARD_IS_ROBO_V2

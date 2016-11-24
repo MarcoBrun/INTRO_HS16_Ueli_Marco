@@ -26,8 +26,6 @@ extern void __init_registers();
 extern void __init_hardware();
 extern void __init_user();
 
-extern void __copy_rom_sections_to_ram(void);
-
 /* format of the ROM table info entry ... */
 typedef struct RomInfo {
   unsigned long	Source;
@@ -40,7 +38,7 @@ extern RomInfo __S_romp[] __attribute__((weak));    /* linker defined symbol */
 /*
  *	Routine to copy a single section from ROM to RAM ...
  */
-void __copy_rom_section(unsigned long dst, unsigned long src, unsigned long size)
+static void __copy_rom_section(unsigned long dst, unsigned long src, unsigned long size)
 {
 	unsigned long len = size;
 
@@ -94,7 +92,7 @@ void __copy_rom_section(unsigned long dst, unsigned long src, unsigned long size
  *	structures.  The final entry in the table has all-zero
  *	fields.
  */
-void __copy_rom_sections_to_ram(void)
+static void __copy_rom_sections_to_ram(void)
 {
 
 	int				index;

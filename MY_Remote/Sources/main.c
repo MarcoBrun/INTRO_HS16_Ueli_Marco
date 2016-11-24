@@ -38,6 +38,8 @@
 #include "UTIL1.h"
 #include "KIN1.h"
 #include "XF1.h"
+#include "IFsh1.h"
+#include "IntFlashLdd1.h"
 #include "CLS1.h"
 #include "AS1.h"
 #include "ASerialLdd1.h"

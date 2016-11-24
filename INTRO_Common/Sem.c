@@ -20,9 +20,6 @@
 #include "Sem.h"
 #include "LED.h"
 
-#define USE_SEMAPHORES 0
-
-#if USE_SEMAPHORES
 static void vSlaveTask(void *pvParameters) {
   xSemaphoreHandle sem = (xSemaphoreHandle)pvParameters;
 
@@ -33,6 +30,9 @@ static void vSlaveTask(void *pvParameters) {
   }
   for(;;) {
     /*! \todo Implement functionality */
+    if (xSemaphoreTake(sem, portMAX_DELAY)==pdPASS) { /* block on semaphore */
+      LED3_Neg();
+    }
   }
 }
 
@@ -55,17 +55,14 @@ static void vMasterTask(void *pvParameters) {
     vTaskDelay(1000/portTICK_PERIOD_MS);
   }
 }
-#endif /* USE_SEMAPHORES */
 
 void SEM_Deinit(void) {
 }
 
 /*! \brief Initializes module */
 void SEM_Init(void) {
-#if USE_SEMAPHORES
   if (xTaskCreate(vMasterTask, "Master", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+1, NULL) != pdPASS) {
     for(;;){} /* error */
   }
-#endif
 }
 #endif /* PL_CONFIG_HAS_SEMAPHORE */

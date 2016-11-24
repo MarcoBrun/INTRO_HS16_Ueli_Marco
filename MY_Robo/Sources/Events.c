@@ -167,6 +167,59 @@ void FRTOS1_vApplicationMallocFailedHook(void)
   for(;;) {}
 }
 
+/*
+** ===================================================================
+**     Event       :  PTRC1_OnTraceWrap (module Events)
+**
+**     Component   :  PTRC1 [PercepioTrace]
+**     Description :
+**         Called for trace ring buffer wrap around. This gives the
+**         application a chance to dump the trace buffer.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void PTRC1_OnTraceWrap(void)
+{
+#if 0 /* default implementation for gdb below ... */
+  /* Write your code here ... */
+  uint8_t buf[64];
+
+  /* GDB: dump binary memory <file> <hexStartAddr> <hexEndAddr> */
+  PTRC1_vGetGDBDumpCommand(buf, sizeof(buf), "c:\\tmp\\trc.dump");
+#endif
+}
+
+/*
+** ===================================================================
+**     Event       :  QuadInt_OnInterrupt (module Events)
+**
+**     Component   :  QuadInt [TimerInt]
+**     Description :
+**         When a timer interrupt occurs this event is called (only
+**         when the component is enabled - <Enable> and the events are
+**         enabled - <EnableEvent>). This event is enabled only if a
+**         <interrupt service/event> is enabled.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void QuadInt_OnInterrupt(void)
+{
+#if configUSE_SEGGER_SYSTEM_VIEWER_HOOKS
+  //SEGGER_SYSVIEW_OnUserStart(0);
+  SYS1_RecordEnterISR(); /* cannot use this, as it would use RTOS API calls above max syscall level! */
+#endif
+#if PL_CONFIG_HAS_QUADRATURE
+  Q4CLeft_Sample();
+  Q4CRight_Sample();
+#endif
+#if configUSE_SEGGER_SYSTEM_VIEWER_HOOKS
+  //SEGGER_SYSVIEW_OnUserStop(0);
+  SYS1_RecordExitISR();
+#endif
+}
+
 /* END Events */
 
 #ifdef __cplusplus
