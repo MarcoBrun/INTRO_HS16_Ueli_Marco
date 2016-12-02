@@ -51,8 +51,6 @@
 #include "BitIoLdd10.h"
 #include "LEDPin2.h"
 #include "BitIoLdd11.h"
-#include "LEDPin3.h"
-#include "BitIoLdd12.h"
 #include "CLS1.h"
 #include "AS1.h"
 #include "ASerialLdd1.h"

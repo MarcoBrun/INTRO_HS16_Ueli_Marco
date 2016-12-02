@@ -115,7 +115,7 @@ static void StateMachine(void) {
     case STATE_STOP:
       SHELL_SendString("Stopped!\r\n");
 #if PL_CONFIG_HAS_TURN
-      TURN_Turn(TURN_STOP, NULL);
+      TURN_Turn(TURN_LEFT90, NULL);
 #endif
       LF_currState = STATE_IDLE;
       break;

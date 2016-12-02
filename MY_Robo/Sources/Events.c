@@ -37,6 +37,7 @@ extern "C" {
 /* User includes (#include below this line is not maintained by Processor Expert) */
 #include "Platform.h"
 #include "Timer.h"
+#include "Tacho.h"
 /*
 ** ===================================================================
 **     Event       :  Cpu_OnNMIINT (module Events)
@@ -221,6 +222,57 @@ void QuadInt_OnInterrupt(void)
   //SEGGER_SYSVIEW_OnUserStop(0);
   SYS1_RecordExitISR();
 #endif
+}
+
+/*
+** ===================================================================
+**     Event       :  RF1_OnActivate (module Events)
+**
+**     Component   :  RF1 [nRF24L01]
+**     Description :
+**         Event called before accessing the bus.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void RF1_OnActivate(void)
+{
+  /* Write your code here ... */
+}
+
+/*
+** ===================================================================
+**     Event       :  RF1_OnDeactivate (module Events)
+**
+**     Component   :  RF1 [nRF24L01]
+**     Description :
+**         Event called before releasing the bus.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void RF1_OnDeactivate(void)
+{
+  /* Write your code here ... */
+}
+
+/*
+** ===================================================================
+**     Event       :  RNET1_OnRadioEvent (module Events)
+**
+**     Component   :  RNET1 [RNet]
+**     Description :
+**         Event created for various radio states, like timeout, ack
+**         received, data sent, ...
+**     Parameters  :
+**         NAME            - DESCRIPTION
+**         event           - 
+**     Returns     : Nothing
+** ===================================================================
+*/
+void RNET1_OnRadioEvent(RNET1_RadioEvent event)
+{
+  /* Write your code here ... */
 }
 
 /* END Events */
