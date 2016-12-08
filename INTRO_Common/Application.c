@@ -36,6 +36,9 @@
 #if PL_CONFIG_BOARD_IS_ROBO_V2
   #include "PORT_PDD.h"
 #endif
+#if PL_CONFIG_HAS_LINE_FOLLOW
+  #include "LineFollow.h"
+#endif
 
 #if PL_CONFIG_HAS_EVENTS
 void APP_EventHandler(EVNT_Handle event) {
@@ -63,6 +66,9 @@ void APP_EventHandler(EVNT_Handle event) {
     SHELL_SendString("SW1 pressed\r\n");
     #if PL_CONFIG_HAS_BUZZER
     BUZ_PlayTune(BUZ_TUNE_BUTTON);
+    #endif
+    #if PL_CONFIG_HAS_LINE_FOLLOW
+    LF_StartStopFollowing();
     #endif
     break;
   #endif
@@ -128,8 +134,8 @@ static void APP_AdoptToHardware(void) {
 #if PL_CONFIG_HAS_MOTOR
   if (KIN1_UIDSame(&id, &RoboIDs[2])) { /* L4 */
     MOT_Invert(MOT_GetMotorHandle(MOT_MOTOR_LEFT), TRUE); /* revert left motor */
-   // (void)Q4CLeft_SwapPins(TRUE);
-   // (void)Q4CRight_SwapPins(TRUE);
+    (void)Q4CLeft_SwapPins(TRUE);
+    (void)Q4CRight_SwapPins(TRUE);
   } else if (KIN1_UIDSame(&id, &RoboIDs[0])) { /* L20 */
     (void)Q4CRight_SwapPins(TRUE);
     MOT_Invert(MOT_GetMotorHandle(MOT_MOTOR_LEFT), TRUE); /* revert left motor */

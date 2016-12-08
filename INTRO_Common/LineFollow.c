@@ -91,12 +91,19 @@ static void StateMachine(void) {
       break;
     case STATE_FOLLOW_SEGMENT:
       if (!FollowSegment()) {
+    	  REF_LineKind currLineKind;
+    	  currLineKind = REF_GetLineKind();
+    	  if (currLineKind==4){ /* Ziel erreicht (Nur Schwarz) */
+    	      LF_currState = STATE_FINISHED;
+    	      SHELL_SendString((unsigned char*)"Finished area reched\r\n");
+    	  }
+    	  	  if (currLineKind==0){ /* keine Line mehr */
+    	      LF_currState = STATE_TURN;
+		      SHELL_SendString((unsigned char*)"Keine Line mehr--> Trun\r\n");
+    	  }
     #if PL_CONFIG_HAS_LINE_MAZE
         LF_currState = STATE_TURN; /* make turn */
         SHELL_SendString((unsigned char*)"no line, turn..\r\n");
-    #else
-        LF_currState = STATE_STOP; /* stop if we do not have a line any more */
-        SHELL_SendString((unsigned char*)"No line, stopped!\r\n");
     #endif
       }
       break;
@@ -105,19 +112,27 @@ static void StateMachine(void) {
       #if PL_CONFIG_HAS_LINE_MAZE
       /*! \todo Handle maze turning */
       #endif /* PL_CONFIG_HAS_LINE_MAZE */
+		#if PL_CONFIG_HAS_TURN
+    		TURN_Turn(TURN_LEFT180, NULL);
+    		LF_currState = STATE_FOLLOW_SEGMENT;
+		#endif
       break;
 
     case STATE_FINISHED:
       #if PL_CONFIG_HAS_LINE_MAZE
       /*! \todo Handle maze finished */
       #endif /* PL_CONFIG_HAS_LINE_MAZE */
+      SHELL_SendString("Finished!\r\n");
+      MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT),
+           (MOT_SpeedPercent) 0);
+      MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT),
+           (MOT_SpeedPercent) 0);
+      LF_currState = STATE_IDLE;
       break;
     case STATE_STOP:
       SHELL_SendString("Stopped!\r\n");
-#if PL_CONFIG_HAS_TURN
-      TURN_Turn(TURN_LEFT90, NULL);
-#endif
       LF_currState = STATE_IDLE;
+
       break;
   } /* switch */
 }

@@ -42,6 +42,14 @@
 #include "BitIoLdd5.h"
 #include "SW6.h"
 #include "BitIoLdd6.h"
+#include "RNET1.h"
+#include "RF1.h"
+#include "CE1.h"
+#include "BitIoLdd8.h"
+#include "CSN1.h"
+#include "BitIoLdd9.h"
+#include "SM1.h"
+#include "SMasterLdd1.h"
 #include "SW7.h"
 #include "ExtIntLdd5.h"
 #include "LEDPin1.h"
@@ -70,6 +78,7 @@
 #include "UTIL1.h"
 #include "KIN1.h"
 #include "XF1.h"
+#include "MCUC1.h"
 /* Including shared modules, which are used for whole project */
 #include "PE_Types.h"
 #include "PE_Error.h"
@@ -91,7 +100,6 @@ int main(void)
   /* Write your code here */
   /* For example: for(;;) { } */
   APP_Start();
-
 
   /*** Don't write any code pass this line, or it will be deleted during code generation. ***/
   /*** RTOS startup code. Macro PEX_RTOS_START is defined by the RTOS component. DON'T MODIFY THIS CODE!!! ***/

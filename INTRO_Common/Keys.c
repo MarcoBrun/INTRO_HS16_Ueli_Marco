@@ -30,7 +30,6 @@ void KEY_Scan(void) {
 #if PL_CONFIG_NOF_KEYS>=1 && !PL_CONFIG_KEY_1_ISR
   if (KEY1_Get()) { /* key pressed */
     EVNT_SetEvent(EVNT_SW1_PRESSED);
-  //  LF_StartStopFollowing();
   }
 #endif
   /*! \todo check handling all keys */

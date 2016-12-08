@@ -82,6 +82,7 @@ void TURN_MoveToPos(int32_t targetLPos, int32_t targetRPos, bool wait, TURN_Stop
       break; /* timeout */
     }
     if (wait && DRV_HasTurned()) {
+    	(void)DRV_SetMode(DRV_MODE_NONE);
       break;
     }
     if (!wait) {
@@ -183,7 +184,7 @@ void TURN_TurnAngle(int16_t angle, TURN_StopFct stopIt) {
   if (isLeft) {
     angle = -angle; /* make it positive */
   }
-  angle %= 360; /* keep it inside 360° */
+  angle %= 360; /* keep it inside 360ï¿½ */
   steps = (angle*TURN_Steps90)/90;
   if (isLeft) {
     StepsTurn(-steps, steps, stopIt, ((angle/90)+1)*TURN_STEPS_90_TIMEOUT_MS);
@@ -211,7 +212,7 @@ static void TURN_PrintStatus(const CLS1_StdIOType *io) {
   CLS1_SendStatusStr((unsigned char*)"turn", (unsigned char*)"\r\n", io->stdOut);
   UTIL1_Num32sToStr(buf, sizeof(buf), TURN_Steps90);
   UTIL1_strcat(buf, sizeof(buf), (unsigned char*)" steps\r\n");
-  CLS1_SendStatusStr((unsigned char*)"  90°", buf, io->stdOut);
+  CLS1_SendStatusStr((unsigned char*)"  90ï¿½", buf, io->stdOut);
 
   UTIL1_Num32sToStr(buf, sizeof(buf), TURN_StepsLine);
   UTIL1_strcat(buf, sizeof(buf), (unsigned char*)" steps\r\n");

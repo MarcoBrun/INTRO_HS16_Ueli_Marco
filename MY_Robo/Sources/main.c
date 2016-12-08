@@ -81,7 +81,6 @@
 #include "QuadInt.h"
 #include "TimerIntLdd2.h"
 #include "TU_QuadInt.h"
-#include "RNET1.h"
 #include "RF1.h"
 #include "CE1.h"
 #include "BitIoLdd22.h"
@@ -97,6 +96,8 @@
 #include "Tx1.h"
 #include "Rx1.h"
 #include "USB0.h"
+#include "RNET1.h"
+//#include "MCUC1.h"
 #include "IFsh1.h"
 #include "IntFlashLdd1.h"
 #include "PTRC1.h"
@@ -116,6 +117,8 @@
 #include "IO_Map.h"
 /* User includes (#include below this line is not maintained by Processor Expert) */
 #include "Application.h"
+
+
 
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
 int main(void)

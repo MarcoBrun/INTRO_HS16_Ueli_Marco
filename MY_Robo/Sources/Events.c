@@ -37,7 +37,6 @@ extern "C" {
 /* User includes (#include below this line is not maintained by Processor Expert) */
 #include "Platform.h"
 #include "Timer.h"
-#include "Tacho.h"
 /*
 ** ===================================================================
 **     Event       :  Cpu_OnNMIINT (module Events)
@@ -123,9 +122,6 @@ void FRTOS1_vApplicationTickHook(void)
 #if PL_CONFIG_HAS_TIMER
   TMR_OnInterrupt();
 #endif
-#if PL_CONFIG_HAS_MOTOR_TACHO
-  TACHO_Sample();
-#endif
 }
 
 /*
@@ -210,7 +206,7 @@ void PTRC1_OnTraceWrap(void)
 */
 void QuadInt_OnInterrupt(void)
 {
-#if configUSE_SEGGER_SYSTEM_VIEWER_HOOKS
+#if 0 && configUSE_SEGGER_SYSTEM_VIEWER_HOOKS
   //SEGGER_SYSVIEW_OnUserStart(0);
   SYS1_RecordEnterISR(); /* cannot use this, as it would use RTOS API calls above max syscall level! */
 #endif
@@ -218,7 +214,7 @@ void QuadInt_OnInterrupt(void)
   Q4CLeft_Sample();
   Q4CRight_Sample();
 #endif
-#if configUSE_SEGGER_SYSTEM_VIEWER_HOOKS
+#if 0 && configUSE_SEGGER_SYSTEM_VIEWER_HOOKS
   //SEGGER_SYSVIEW_OnUserStop(0);
   SYS1_RecordExitISR();
 #endif
@@ -252,25 +248,6 @@ void RF1_OnActivate(void)
 ** ===================================================================
 */
 void RF1_OnDeactivate(void)
-{
-  /* Write your code here ... */
-}
-
-/*
-** ===================================================================
-**     Event       :  RNET1_OnRadioEvent (module Events)
-**
-**     Component   :  RNET1 [RNet]
-**     Description :
-**         Event created for various radio states, like timeout, ack
-**         received, data sent, ...
-**     Parameters  :
-**         NAME            - DESCRIPTION
-**         event           - 
-**     Returns     : Nothing
-** ===================================================================
-*/
-void RNET1_OnRadioEvent(RNET1_RadioEvent event)
 {
   /* Write your code here ... */
 }

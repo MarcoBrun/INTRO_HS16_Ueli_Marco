@@ -84,7 +84,6 @@
 #include "QuadInt.h"
 #include "TimerIntLdd2.h"
 #include "TU_QuadInt.h"
-#include "RNET1.h"
 #include "RF1.h"
 #include "CE1.h"
 #include "BitIoLdd22.h"
@@ -100,6 +99,8 @@
 #include "Tx1.h"
 #include "Rx1.h"
 #include "USB0.h"
+#include "RNET1.h"
+//#include "MCUC1.h"
 #include "IFsh1.h"
 #include "IntFlashLdd1.h"
 #include "PTRC1.h"
@@ -260,22 +261,6 @@ void RF1_OnDeactivate(void);
 **     Description :
 **         Event called before releasing the bus.
 **     Parameters  : None
-**     Returns     : Nothing
-** ===================================================================
-*/
-
-void RNET1_OnRadioEvent(RNET1_RadioEvent event);
-/*
-** ===================================================================
-**     Event       :  RNET1_OnRadioEvent (module Events)
-**
-**     Component   :  RNET1 [RNet]
-**     Description :
-**         Event created for various radio states, like timeout, ack
-**         received, data sent, ...
-**     Parameters  :
-**         NAME            - DESCRIPTION
-**         event           - 
 **     Returns     : Nothing
 ** ===================================================================
 */
