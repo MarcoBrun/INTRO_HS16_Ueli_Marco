@@ -29,7 +29,7 @@
 /* \todo adopt the values for your robot */
 #define TURN_STEPS_90         665
   /*!< number of steps for a 90 degree turn */
-#define TURN_STEPS_LINE       100
+#define TURN_STEPS_LINE       600
   /*!< number of steps stepping over the line */
 #define TURN_STEPS_POST_LINE  50
   /*!< number of steps after the line, before making a turn */

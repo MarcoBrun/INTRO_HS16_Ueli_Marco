@@ -18,6 +18,8 @@
 #endif
 #if PL_CONFIG_HAS_MOTOR
   #include "Motor.h"
+  #include "Turn.h"
+  #include "LineFollow.h"
 #endif
 #if PL_CONFIG_HAS_RADIO
   #include "RNet_App.h"
@@ -225,7 +227,14 @@ static int16_t scaleJoystickTo1K(int8_t val) {
 }
 #endif
 
+
+
+
+static int32_t rechts=0, links=0;
+
+
 uint8_t REMOTE_HandleRemoteRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *data, RNWK_ShortAddrType srcAddr, bool *handled, RPHY_PacketDesc *packet) {
+int32_t newleft, newright;
 #if PL_CONFIG_HAS_SHELL
   uint8_t buf[48];
 #endif
@@ -277,6 +286,7 @@ uint8_t REMOTE_HandleRemoteRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *
 #endif
     case RAPP_MSG_TYPE_JOYSTICK_BTN:
       *handled = TRUE;
+      DRV_SetMode(DRV_MODE_SPEED);
       val = *data; /* get data value */
 #if PL_CONFIG_HAS_SHELL && PL_CONFIG_HAS_BUZZER && PL_CONFIG_HAS_REMOTE
       if (val=='F') { /* F button, disable remote */
@@ -289,11 +299,64 @@ uint8_t REMOTE_HandleRemoteRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *
         REMOTE_SetOnOff(TRUE);
         DRV_SetMode(DRV_MODE_SPEED);
         SHELL_SendString("Remote ON\r\n");
-      } else if (val=='C') { /* red 'C' button */
+      }  else if (val=='A') { /* gerade 'A'  */
         /*! \todo add functionality */
-      } else if (val=='A') { /* green 'A' button */
-        /*! \todo add functionality */
+    	 if(links != rechts)
+    	 {
+    		 if(links > rechts)
+    		 {
+    			 links = rechts;
+    		 }
+    		 else{
+    			 rechts = links;
+    		 }
+    	 }
+    	  links = links + 800;
+    	  rechts = rechts + 800;
+
+    	  DRV_SetSpeed(links, rechts);
+
       }
+      else if (val=='B') { /* rechts 'B'  */
+              /*! \todo add functionality */
+    	  rechts  = rechts -800;
+    	  DRV_SetSpeed(links , rechts);
+            }
+      else if (val=='C') { /* rückwerts 'C' */
+     	 if(links != rechts)
+     	 {
+     		 if(links > rechts)
+     		 {
+     			 links = rechts;
+     		 }
+    		 else{
+    			 rechts = links;
+    		 }
+     	 }
+    	  links = links - 800;
+    	  rechts = rechts - 800;
+              /*! \todo add functionality */
+    	  DRV_SetSpeed(links, rechts );
+            }
+      else if (val=='D') { /* links 'D' */
+              /*! \todo add functionality */
+    	  links = links -800;
+    	  DRV_SetSpeed(links, rechts);
+            }
+      else if (val=='E') { /* stopp 'E' /
+              /*! \todo add functionality */
+    	  DRV_SetSpeed(links = 0, rechts = 0);
+            }
+      else if (val=='X') { /* 90 Grad links 'X'  */
+              /*! \todo add functionality */
+    	  	  TURN_Turn(TURN_LEFT90, false);
+            }
+      else if (val=='Y') { /* start Linefollowing 'Y'*/
+              /*! \todo add functionality */
+    	  	  black = 0;
+    	  	  LF_StartFollowing();
+
+            }
 #else
       *handled = FALSE; /* no shell and no buzzer? */
 #endif

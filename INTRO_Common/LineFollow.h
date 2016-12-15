@@ -18,6 +18,7 @@
 uint8_t LF_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_StdIOType *io);
 #endif
 
+volatile extern uint8_t black;
 void LF_StartFollowing(void);
 void LF_StopFollowing(void);
 void LF_StartStopFollowing(void);

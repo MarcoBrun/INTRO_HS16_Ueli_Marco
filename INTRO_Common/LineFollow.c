@@ -84,7 +84,7 @@ static bool FollowSegment(void) {
     return FALSE; /* intersection/change of direction or not on line any more */
   }
 }
-
+volatile uint8_t black = 0,startSend = 0;
 static void StateMachine(void) {
   switch (LF_currState) {
     case STATE_IDLE:
@@ -94,8 +94,19 @@ static void StateMachine(void) {
     	  REF_LineKind currLineKind;
     	  currLineKind = REF_GetLineKind();
     	  if (currLineKind==4){ /* Ziel erreicht (Nur Schwarz) */
+    		  if(startSend == 0)
+    		  {
+    			  //(void)RAPP_SendPayloadDataBlock(&buf, sizeof(buf), RAPP_MSG_TYPE_JOYSTICK_BTN, RNETA_GetDestAddr(), RPHY_PACKET_FLAGS_REQ_ACK);
+    		  }
+    		  if(black == 0)
+    		  {
+    			  black++;
+				  TURN_Turn(TURN_STEP_LINE_FW, false);
+    		  }
+    		  else{
     	      LF_currState = STATE_FINISHED;
     	      SHELL_SendString((unsigned char*)"Finished area reched\r\n");
+    		  }
     	  }
     	  	  if (currLineKind==0){ /* keine Line mehr */
     	      LF_currState = STATE_TURN;
