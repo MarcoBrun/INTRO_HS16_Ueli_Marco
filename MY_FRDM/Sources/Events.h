@@ -81,7 +81,7 @@
 #include "UTIL1.h"
 #include "KIN1.h"
 #include "XF1.h"
-#include "MCUC1.h"
+//#include "MCUC1.h"
 
 #ifdef __cplusplus
 extern "C" {

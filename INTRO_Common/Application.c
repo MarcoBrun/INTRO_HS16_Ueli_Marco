@@ -26,6 +26,19 @@
   #include "FRTOS1.h"
   #include "RTOS.h"
 #endif
+#include "RApp.h"
+#if PL_CONFIG_HAS_MOTOR
+  #include "Motor.h"
+#endif
+
+uint8_t buf;
+#if PL_CONFIG_HAS_BUZZER
+  #include "Buzzer.h"
+#endif
+#if PL_CONFIG_HAS_RTOS
+  #include "FRTOS1.h"
+  #include "RTOS.h"
+#endif
 #if PL_CONFIG_HAS_QUADRATURE
   #include "Q4CLeft.h"
   #include "Q4CRight.h"
@@ -78,6 +91,7 @@ void APP_EventHandler(EVNT_Handle event) {
   #if PL_CONFIG_NOF_KEYS>=2
   case EVNT_SW2_PRESSED:
     SHELL_SendString("SW2 pressed\r\n");
+
     LED1_Neg();
     break;
   #endif
@@ -97,6 +111,10 @@ void APP_EventHandler(EVNT_Handle event) {
   case EVNT_SW5_PRESSED:
     SHELL_SendString("SW5 pressed\r\n");
     LED1_Neg();
+#if (PL_CONFIG_HAS_REMOTE) && (PL_CONFIG_CONTROL_SENDER)
+    buf = 'A';
+    (void)RAPP_SendPayloadDataBlock(&buf, sizeof(buf), RAPP_MSG_TYPE_JOYSTICK_BTN, RNETA_GetDestAddr(), RPHY_PACKET_FLAGS_REQ_ACK);
+#endif
     break;
   #endif
   #if PL_CONFIG_NOF_KEYS>=6
