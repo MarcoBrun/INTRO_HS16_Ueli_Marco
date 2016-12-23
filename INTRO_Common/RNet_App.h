@@ -26,6 +26,8 @@ RNWK_ShortAddrType RNETA_GetDestAddr(void);
 /*! \brief Driver de-initialization */
 void RNETA_Deinit(void);
 
+void RNETA_SetDestAddr(uint8_t dest);
+
 /*! \brief Driver initialization */
 void RNETA_Init(void);
 #endif /* PL_CONFIG_HAS_RADIO */

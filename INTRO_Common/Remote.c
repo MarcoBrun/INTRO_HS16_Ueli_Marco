@@ -231,10 +231,11 @@ static int16_t scaleJoystickTo1K(int8_t val) {
 
 
 static int32_t rechts=0, links=0;
-
+static uint8_t startA = 0;
 
 uint8_t REMOTE_HandleRemoteRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *data, RNWK_ShortAddrType srcAddr, bool *handled, RPHY_PacketDesc *packet) {
 int32_t newleft, newright;
+uint8_t bufSend[2];
 #if PL_CONFIG_HAS_SHELL
   uint8_t buf[48];
 #endif
@@ -311,10 +312,21 @@ int32_t newleft, newright;
     			 rechts = links;
     		 }
     	 }
+
     	  links = links + 800;
     	  rechts = rechts + 800;
 
     	  DRV_SetSpeed(links, rechts);
+    	  /*erstmaliges Senden des Start Ack*/
+    	  if(startA == 0)
+    	  {
+    		  RNETA_SetDestAddr(0x12);
+			  bufSend[0] = 14;
+			  bufSend[1] = 'A';
+    	      (void)RAPP_SendPayloadDataBlock(bufSend, sizeof(bufSend), 0xAC, RNETA_GetDestAddr(), RPHY_PACKET_FLAGS_REQ_ACK);
+    		  startA++;
+    		  RNETA_SetDestAddr(0xFF);
+    	  }
 
       }
       else if (val=='B') { /* rechts 'B'  */
@@ -345,6 +357,7 @@ int32_t newleft, newright;
             }
       else if (val=='E') { /* stopp 'E' /
               /*! \todo add functionality */
+
     	  DRV_SetSpeed(links = 0, rechts = 0);
             }
       else if (val=='X') { /* 90 Grad links 'X'  */
@@ -353,7 +366,7 @@ int32_t newleft, newright;
             }
       else if (val=='Y') { /* start Linefollowing 'Y'*/
               /*! \todo add functionality */
-    	  	  black = 0;
+
     	  	  LF_StartFollowing();
 
             }

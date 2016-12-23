@@ -30,6 +30,9 @@
 #if PL_CONFIG_HAS_LINE_MAZE
   #include "Maze.h"
 #endif
+  #include "RNet_App.h"
+  #include "RNet_AppConfig.h"
+#include "RApp.h"
 
 typedef enum {
   STATE_IDLE,              /* idle, not doing anything */
@@ -86,6 +89,7 @@ static bool FollowSegment(void) {
 }
 volatile uint8_t black = 0,startSend = 0;
 static void StateMachine(void) {
+	uint8_t bufSend[2];
   switch (LF_currState) {
     case STATE_IDLE:
       break;
@@ -96,7 +100,12 @@ static void StateMachine(void) {
     	  if (currLineKind==4){ /* Ziel erreicht (Nur Schwarz) */
     		  if(startSend == 0)
     		  {
-    			  //(void)RAPP_SendPayloadDataBlock(&buf, sizeof(buf), RAPP_MSG_TYPE_JOYSTICK_BTN, RNETA_GetDestAddr(), RPHY_PACKET_FLAGS_REQ_ACK);
+    			  RNETA_SetDestAddr(0x12);
+    			  bufSend[0] = 14;
+    			  bufSend[1] = 'B';
+    			  (void)RAPP_SendPayloadDataBlock(bufSend, sizeof(bufSend), 0xAC, RNETA_GetDestAddr(), RPHY_PACKET_FLAGS_REQ_ACK);
+    			  startSend++;
+    			  RNETA_SetDestAddr(0xFF);
     		  }
     		  if(black == 0)
     		  {
@@ -105,7 +114,14 @@ static void StateMachine(void) {
     		  }
     		  else{
     	      LF_currState = STATE_FINISHED;
+    	      RNETA_SetDestAddr(0x12);
+			  bufSend[0] = 14;
+			  bufSend[1] = 'C';
+    	      (void)RAPP_SendPayloadDataBlock(bufSend, sizeof(bufSend), 0xAC, RNETA_GetDestAddr(), RPHY_PACKET_FLAGS_REQ_ACK);
     	      SHELL_SendString((unsigned char*)"Finished area reched\r\n");
+    	      RNETA_SetDestAddr(0xFF);
+
+
     		  }
     	  }
     	  	  if (currLineKind==0){ /* keine Line mehr */
